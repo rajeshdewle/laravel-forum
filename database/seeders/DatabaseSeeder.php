@@ -13,6 +13,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        // \App\Models\User::factory(50)->create();
+        $threads = \App\Models\Thread::factory(50)->create();
+
+        foreach ($threads as $thread) {
+            \App\Models\Reply::factory(10)->create([
+                'thread_id' => $thread->id,
+                'user_id' => $thread->user_id
+            ]);
+        }
     }
 }
